@@ -366,22 +366,27 @@ static void x_draw_title_border(Con *con, struct deco_render_params *p) {
     assert(con->parent != NULL);
 
     Rect *dr = &(con->deco_rect);
+    bool is_focused = con == focused || con_inside_focused(con);
 
-    /* Left */
-    draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
-                        dr->x, dr->y, 1, dr->height);
+    if (is_focused) {
+        /* Left */
+        draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
+                            dr->x, dr->y, 1, dr->height);
 
-    /* Right */
-    draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
-                        dr->x + dr->width - 1, dr->y, 1, dr->height);
+        /* Right */
+        draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
+                            dr->x + dr->width - 1, dr->y, 1, dr->height);
 
-    /* Top */
-    draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
-                        dr->x, dr->y, dr->width, 1);
+        /* Top */
+        draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
+                            dr->x, dr->y, dr->width, 1);
+    };
 
-    /* Bottom */
-    draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
-                        dr->x, dr->y + dr->height - 1, dr->width, 1);
+    if (!is_focused) {
+        /* Bottom */
+        draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
+                            dr->x, dr->y + dr->height - 1, dr->width, 1);
+    };
 }
 
 static void x_draw_decoration_after_title(Con *con, struct deco_render_params *p) {
