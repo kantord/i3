@@ -378,6 +378,10 @@ static void x_draw_title_border(Con *con, struct deco_render_params *p) {
     /* Top */
     draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
                         dr->x, dr->y, dr->width, 1);
+
+    /* Bottom */
+    draw_util_rectangle(&(con->parent->frame_buffer), p->color->border,
+                        dr->x, dr->y + dr->height - 1, dr->width, 1);
 }
 
 static void x_draw_decoration_after_title(Con *con, struct deco_render_params *p) {
