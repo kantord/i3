@@ -624,7 +624,7 @@ void x_draw_decoration(Con *con) {
     /* 6: draw the title */
     int text_offset_y = (con->deco_rect.height - config.font.height) / 2;
 
-    const int title_padding = logical_px(2);
+    const int title_padding = logical_px(4);
     const int deco_width = (int)con->deco_rect.width;
     int mark_width = 0;
     if (config.show_marks && !TAILQ_EMPTY(&(con->marks_head))) {
